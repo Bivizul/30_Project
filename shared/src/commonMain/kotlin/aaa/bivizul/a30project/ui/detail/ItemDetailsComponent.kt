@@ -1,21 +1,29 @@
 package aaa.bivizul.a30project.ui.detail
 
+import aaa.bivizul.a30project.data.apoststore.ApostpopcryptStore
+import aaa.bivizul.a30project.data.model.Apostpopcrypt
 import com.arkivanov.decompose.ComponentContext
-
-interface ItemDetails {
-
-//    fun onCloseClicked()
-}
+import com.arkivanov.decompose.value.MutableValue
+import com.arkivanov.decompose.value.Value
+import kotlinx.coroutines.flow.StateFlow
 
 class ItemDetailsComponent(
     componentContext: ComponentContext,
-//    itemId: Long,
-//    private val onFinished: () -> Unit
+    val data: ApostpopcryptStore,
+    itemId: Int,
 ) : ItemDetails, ComponentContext by componentContext {
 
-    // Omitted code
+    override val state: StateFlow<List<Apostpopcrypt>?> = data.apostpopcrypt
 
-//    override fun onCloseClicked() {
-//        onFinished()
-//    }
+    private val _models = MutableValue(ItemDetails.Model(itemId))
+    override val models: Value<ItemDetails.Model> = _models
+
+
+    init {
+        println("ItemDetailsComponent id : $itemId")
+    }
+
+//    override val models: Value<ItemDetails.Model>
+//        get() = TODO("Not yet implemented")
+
 }

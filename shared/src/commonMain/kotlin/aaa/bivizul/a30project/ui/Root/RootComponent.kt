@@ -33,14 +33,6 @@ interface Root {
     }
 }
 
-//fun CoroutineScope(context: CoroutineContext, lifecycle: Lifecycle): CoroutineScope {
-//    val scope = CoroutineScope(context)
-//    lifecycle.doOnDestroy(scope::cancel)
-//    return scope
-//}
-//
-//fun LifecycleOwner.coroutineScope(context: CoroutineContext): CoroutineScope =
-//    CoroutineScope(context, lifecycle)
 
 class RootComponent constructor(
     componentContext: ComponentContext,
@@ -48,6 +40,7 @@ class RootComponent constructor(
 
     private val navigation = StackNavigation<Config>()
     val data = ApostpopcryptStore()
+    private val listInput = data.apostpopcrypt
 
     private val stack =
         childStack(
@@ -64,9 +57,7 @@ class RootComponent constructor(
             is Config.Splash -> Root.Child.SplashChild(itemSplash(componentContext))
             is Config.Main -> Root.Child.MainChild(itemMain(componentContext))
             is Config.List -> Root.Child.ListChild(itemList(componentContext))
-            is Config.Details -> Root.Child.DetailsChild(itemDetails(componentContext))
-
-
+            is Config.Details -> Root.Child.DetailsChild(itemDetails(componentContext, config))
         }
 
     private fun itemSplash(componentContext: ComponentContext): ItemSplash =
@@ -89,15 +80,19 @@ class RootComponent constructor(
         ItemListComponent(
             componentContext = componentContext,
             data = data,
-            onItemSelected = {},
-            onClick = {
-                navigation.push(Config.Details)
-            },
+            onItemSelected = {
+                navigation.push(Config.Details(itemId = it))
+            }
         )
 
-    private fun itemDetails(componentContext: ComponentContext): ItemDetails =
+    private fun itemDetails(
+        componentContext: ComponentContext,
+        config: Config.Details
+    ): ItemDetails =
         ItemDetailsComponent(
-            componentContext = componentContext
+            componentContext = componentContext,
+            data = data,
+            itemId = config.itemId
         )
 
     private sealed class Config : Parcelable {
@@ -111,6 +106,6 @@ class RootComponent constructor(
         object List : Config()
 
         @Parcelize
-        object Details : Config()
+        data class Details(val itemId: Int) : Config()
     }
 }

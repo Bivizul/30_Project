@@ -27,8 +27,9 @@ class ApostpopcryptStore {
 //    }
 
     init {
-
+        getApostpopcrypt()
     }
+
 
     fun getApostpopcrypt() {
         scope.launch {
@@ -49,7 +50,6 @@ class ApostpopcryptStore {
 //    }
 
 //    suspend fun getApostpopcrypt() : List<Apostpopcrypt> = spbkApi.getApostpopcrypt()
-
 
 
 }
