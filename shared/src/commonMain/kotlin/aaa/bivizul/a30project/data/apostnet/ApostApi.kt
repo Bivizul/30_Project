@@ -46,13 +46,16 @@ class ApostApi {
     }
 
     suspend fun getApostpopcrypt(): List<Apostpopcrypt> {
+        println("ApostApi getApostpopcrypt")
         val url = POPCRYPTURL
         val response = client.get { base(url) }
         val body = response.body<List<Apostpopcrypt>>()
+//        println("body : $body")
         return body
     }
 
     suspend fun getGetapost(apost: Apost): Getapost {
+        println("ApostApi getGetapost")
         val url = APOSTURL
         val response = client.post {
             base(url)

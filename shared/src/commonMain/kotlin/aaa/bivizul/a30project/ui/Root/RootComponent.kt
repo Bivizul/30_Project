@@ -1,5 +1,7 @@
 package aaa.bivizul.a30project.ui.Root
 
+import aaa.bivizul.a30project.data.apostnet.ApostApi
+import aaa.bivizul.a30project.data.apoststore.ApostpopcryptStore
 import aaa.bivizul.a30project.ui.detail.ItemDetails
 import aaa.bivizul.a30project.ui.detail.ItemDetailsComponent
 import aaa.bivizul.a30project.ui.list.ItemList
@@ -11,8 +13,13 @@ import aaa.bivizul.a30project.ui.splash.ItemSplashComponent
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
+import com.arkivanov.essenty.lifecycle.Lifecycle
+import com.arkivanov.essenty.lifecycle.LifecycleOwner
+import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
 
 interface Root {
 
@@ -26,11 +33,21 @@ interface Root {
     }
 }
 
+//fun CoroutineScope(context: CoroutineContext, lifecycle: Lifecycle): CoroutineScope {
+//    val scope = CoroutineScope(context)
+//    lifecycle.doOnDestroy(scope::cancel)
+//    return scope
+//}
+//
+//fun LifecycleOwner.coroutineScope(context: CoroutineContext): CoroutineScope =
+//    CoroutineScope(context, lifecycle)
+
 class RootComponent constructor(
     componentContext: ComponentContext,
 ) : Root, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
+    val data = ApostpopcryptStore()
 
     private val stack =
         childStack(
@@ -57,7 +74,7 @@ class RootComponent constructor(
             componentContext = componentContext,
             onClick = {
                 navigation.push(Config.Main)
-            }
+            },
         )
 
     private fun itemMain(componentContext: ComponentContext): ItemMain =
@@ -71,9 +88,11 @@ class RootComponent constructor(
     private fun itemList(componentContext: ComponentContext): ItemList =
         ItemListComponent(
             componentContext = componentContext,
+            data = data,
+            onItemSelected = {},
             onClick = {
                 navigation.push(Config.Details)
-            }
+            },
         )
 
     private fun itemDetails(componentContext: ComponentContext): ItemDetails =
