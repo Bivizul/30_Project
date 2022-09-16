@@ -64,4 +64,7 @@ dependencies {
     implementation(compose.foundation)
     implementation(Deps.JetBrains.Serialization.serializationJson)
     implementation(Deps.Kmp.Util.onesignal)
+
+    implementation(Deps.ArkIvanov.Decompose.decompose)
+    implementation(Deps.ArkIvanov.Decompose.extensionsAndroid)
 }

@@ -9,8 +9,8 @@ object Deps {
 
         const val kotlin = "1.7.10"
         const val agp = "7.2.2"
-        const val jetbrains_compose = "1.2.0-alpha01-dev774"
-        const val compose_compiler = "1.3.0"
+        const val jetbrains_compose = "1.2.0-alpha01-dev753"
+        const val compose_compiler = "1.2.0"
         const val onesignal = "0.14.0"
     }
 
@@ -75,17 +75,22 @@ object Deps {
         }
 
         object Decompose {
-            //            private const val VERSION = "0.5.1"
-            private const val VERSION = "1.0.0-alpha-04"
+//                        private const val VERSION = "0.5.1"
+//                        private const val VERSION = "0.8.0"
+                        private const val VERSION = "1.0.0-alpha-04-native-compose"
+//            private const val VERSION = "1.0.0-alpha-04"
             const val decompose = "com.arkivanov.decompose:decompose:$VERSION"
-            const val extensionsCompose =
-                "com.arkivanov.decompose:extensions-compose-jetbrains:$VERSION"
+            const val extensionsComposeJetbrains = "com.arkivanov.decompose:extensions-compose-jetbrains:$VERSION"
+            const val extensionsComposeJetpack = "com.arkivanov.decompose:extensions-compose-jetpack:$VERSION"
             const val extensionsAndroid = "com.arkivanov.decompose:extensions-android:$VERSION"
         }
 
         object Essenty {
-            private const val VERSION = "0.2.2"
+            private const val VERSION = "0.5.2"
             const val lifecycle = "com.arkivanov.essenty:lifecycle:$VERSION"
+            const val stateKeeper = "com.arkivanov.essenty:state-keeper:$VERSION"
+            const val instanceKeeper = "com.arkivanov.essenty:instance-keeper:$VERSION"
+            const val backHandler = "com.arkivanov.essenty:back-handler:$VERSION"
         }
     }
 

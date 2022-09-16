@@ -36,7 +36,9 @@ kotlin {
 //                implementation(Deps.Kmp.Util.settings)
                 implementation(Deps.Kmp.Util.onesignal)
                 implementation(Deps.ArkIvanov.Decompose.decompose)
-//                implementation(Deps.ArkIvanov.Decompose.extensionsCompose)
+                implementation(Deps.ArkIvanov.Decompose.extensionsComposeJetbrains)
+//                implementation(Deps.ArkIvanov.Decompose.extensionsComposeJetpack)
+                implementation(Deps.ArkIvanov.Essenty.lifecycle)
             }
         }
         val commonTest by getting {
@@ -49,6 +51,7 @@ kotlin {
                 implementation(Deps.AndroidX.appCompat)
                 implementation(Deps.AndroidX.core_ktx)
                 implementation(compose.material)
+                implementation(Deps.ArkIvanov.Decompose.decompose)
                 implementation(Deps.ArkIvanov.Decompose.extensionsAndroid)
 //                implementation(JetpackCompose.navigation)
 //                implementation (ComposeUtils.accompanistWebview)
