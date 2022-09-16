@@ -1,5 +1,6 @@
 package aaa.bivizul.a30project.ui.detail
 
+import aaa.bivizul.a29project.ui.spbkwidget.Apostcp
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
@@ -17,25 +18,21 @@ fun DetailsContent(
 
     val apostpopcryptList by component.state.collectAsState()
     val model by component.models.subscribeAsState()
-    val a = model.selectedItemId
-
-    println("DetailsContent a : $a")
 
     if (apostpopcryptList != null) {
         apostpopcryptList?.let { list ->
-//            println("DetailsContent list : $list")
+            list[model.selectedItemId].let { item ->
+                Column {
+                    Text(
+                        text = item.aposttitle
+                    )
+                    Text(
+                        text = item.apostdescription
+                    )
+                }
+            }
         }
-
+    } else {
+        Apostcp()
     }
-
-    Column(modifier = modifier.fillMaxSize()) {
-        Text("DetailsContent")
-//        Button(
-//            onClick = { component.onClicked() }
-//        ){
-//            Text("Next")
-//        }
-    }
-
-
 }

@@ -1,4 +1,4 @@
-package aaa.bivizul.a30project.ui.splash
+package aaa.bivizul.a30project.ui.apost
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashContent(
-    component: ItemSplash,
+fun ApostContent(
+    component: ItemApost,
     modifier: Modifier = Modifier
 ) {
 

@@ -1,6 +1,5 @@
-package aaa.bivizul.a30project.ui.Root
+package aaa.bivizul.a30project.ui.root
 
-import aaa.bivizul.a30project.data.apostnet.ApostApi
 import aaa.bivizul.a30project.data.apoststore.ApostpopcryptStore
 import aaa.bivizul.a30project.ui.detail.ItemDetails
 import aaa.bivizul.a30project.ui.detail.ItemDetailsComponent
@@ -8,25 +7,20 @@ import aaa.bivizul.a30project.ui.list.ItemList
 import aaa.bivizul.a30project.ui.list.ItemListComponent
 import aaa.bivizul.a30project.ui.main.ItemMain
 import aaa.bivizul.a30project.ui.main.ItemMainComponent
-import aaa.bivizul.a30project.ui.splash.ItemSplash
-import aaa.bivizul.a30project.ui.splash.ItemSplashComponent
+import aaa.bivizul.a30project.ui.apost.ItemApost
+import aaa.bivizul.a30project.ui.apost.ItemApostComponent
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.lifecycle.Lifecycle
-import com.arkivanov.essenty.lifecycle.LifecycleOwner
-import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.cancel
 
 interface Root {
 
     val childStack: Value<ChildStack<*, Child>>
 
     sealed class Child {
-        class SplashChild(val component: ItemSplash) : Child()
+        class SplashChild(val component: ItemApost) : Child()
         class MainChild(val component: ItemMain) : Child()
         class ListChild(val component: ItemList) : Child()
         class DetailsChild(val component: ItemDetails) : Child()
@@ -60,8 +54,8 @@ class RootComponent constructor(
             is Config.Details -> Root.Child.DetailsChild(itemDetails(componentContext, config))
         }
 
-    private fun itemSplash(componentContext: ComponentContext): ItemSplash =
-        ItemSplashComponent(
+    private fun itemSplash(componentContext: ComponentContext): ItemApost =
+        ItemApostComponent(
             componentContext = componentContext,
             onClick = {
                 navigation.push(Config.Main)

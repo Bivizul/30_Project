@@ -1,4 +1,4 @@
-package aaa.bivizul.a30project.ui.Root
+package aaa.bivizul.a30project.ui.root
 
 import aaa.bivizul.a30project.ui.MyApplicationTheme
 import androidx.compose.foundation.layout.fillMaxSize

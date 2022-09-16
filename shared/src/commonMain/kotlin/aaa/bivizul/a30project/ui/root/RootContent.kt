@@ -1,9 +1,9 @@
-package aaa.bivizul.a30project.ui.Root
+package aaa.bivizul.a30project.ui.root
 
 import aaa.bivizul.a30project.ui.detail.DetailsContent
 import aaa.bivizul.a30project.ui.list.ListContent
 import aaa.bivizul.a30project.ui.main.MainContent
-import aaa.bivizul.a30project.ui.splash.SplashContent
+import aaa.bivizul.a30project.ui.apost.ApostContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -21,7 +21,7 @@ fun RootContent(root: Root, modifier: Modifier = Modifier) {
         modifier = Modifier,
     ) {
         when (val child = it.instance) {
-            is Root.Child.SplashChild -> SplashContent(component = child.component)
+            is Root.Child.SplashChild -> ApostContent(component = child.component)
             is Root.Child.MainChild -> MainContent(component = child.component)
             is Root.Child.ListChild -> ListContent(component = child.component)
             is Root.Child.DetailsChild -> DetailsContent(component = child.component)

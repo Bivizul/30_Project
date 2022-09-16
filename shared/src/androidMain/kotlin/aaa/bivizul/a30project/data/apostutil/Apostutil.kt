@@ -57,7 +57,7 @@ actual fun getApostdlg(apostcon: Any, apostact: Any) {
     val context = apostcon as Context
     val activity = apostact as Activity
     AlertDialog.Builder(context).apply {
-        setTitle("Oops, error connect with server")
+        setTitle("Error connect with server")
         setMessage("Please exit the app and try again later")
         setPositiveButton("Exit") { _, _ ->
             activity.finish()

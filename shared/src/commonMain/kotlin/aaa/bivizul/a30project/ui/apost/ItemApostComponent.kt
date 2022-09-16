@@ -1,17 +1,11 @@
-package aaa.bivizul.a30project.ui.splash
+package aaa.bivizul.a30project.ui.apost
 
 import com.arkivanov.decompose.ComponentContext
 
-interface ItemSplash {
-
-    fun onClicked()
-
-}
-
-class ItemSplashComponent(
+class ItemApostComponent(
     componentContext: ComponentContext,
     private val onClick: () -> Unit
-) : ItemSplash, ComponentContext by componentContext {
+) : ItemApost, ComponentContext by componentContext {
 
     override fun onClicked() {
         onClick()

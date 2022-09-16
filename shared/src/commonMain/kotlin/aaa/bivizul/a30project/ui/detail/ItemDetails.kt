@@ -8,16 +8,10 @@ interface ItemDetails {
 
     val models: Value<Model>
 
-//    fun onClicked()
-
     val state: StateFlow<List<Apostpopcrypt>?>
 
-//    fun onItemClicked(id: Int)
-
-
     data class Model(
-//        val list: List<Apostpopcrypt>,
-        val selectedItemId: Int?
+        val selectedItemId: Int
     )
 
 }
