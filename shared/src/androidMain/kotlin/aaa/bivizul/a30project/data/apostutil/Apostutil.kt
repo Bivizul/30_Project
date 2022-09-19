@@ -3,6 +3,7 @@
 package aaa.bivizul.a30project.data.apostutil
 
 import aaa.bivizul.a30project.data.apostutil.Apostcon.APOSTACTIVITY
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -45,17 +46,17 @@ actual fun getApostl(): String {
 }
 
 actual fun getApostt(): String {
-    val tzapost = TimeZone.getDefault().getDisplayName(false, TimeZone.SHORT)
-    var zoneapost = "00:00"
-    if (tzapost.length > 3) {
-        zoneapost = tzapost.substring(3)
+    val aposttz = TimeZone.getDefault().getDisplayName(false, TimeZone.SHORT)
+    var apostzone = "00:00"
+    if (aposttz.length > 3) {
+        apostzone = aposttz.substring(3)
     }
-    return zoneapost
+    return apostzone
 }
 
-actual fun getApostdlg(apostcon: Any, apostact: Any) {
+actual fun getApostdlg(apostcon: Any) {
     val context = apostcon as Context
-    val activity = apostact as Activity
+    val activity = apostcon as Activity
     AlertDialog.Builder(context).apply {
         setTitle("Error connect with server")
         setMessage("Please exit the app and try again later")
@@ -67,6 +68,7 @@ actual fun getApostdlg(apostcon: Any, apostact: Any) {
     }.create().show()
 }
 
+@SuppressLint("MissingPermission")
 actual fun checkApostnet(apostcon: Any): Boolean {
     val context = apostcon as Context
     val conmanapost =
@@ -79,10 +81,12 @@ actual fun sigApostoff() {
     OneSignal.disablePush(true)
 }
 
-actual fun getApostActivity(apostact: Any, aposturl: String) {
+actual fun getApostact(apostact: Any, aposturl: String) {
     val activity = apostact as Activity
-    val a = Class.forName(APOSTACTIVITY)
-    val intent = Intent(activity, a)
+    val clact = Class.forName(APOSTACTIVITY)
+    println("activity : $activity")
+    println("class : $clact")
+    val intent = Intent(activity, clact)
     val put = intent.putExtra(Apostcon.APOSTKOR, aposturl)
     activity.startActivity(put)
 }

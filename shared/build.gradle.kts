@@ -33,12 +33,11 @@ kotlin {
                 implementation(Deps.Kmp.Ktor.cio)
                 implementation(Deps.JetBrains.KotlinCoroutines.core)
                 implementation(Deps.JetBrains.Serialization.serializationJson)
-//                implementation(Deps.Kmp.Util.settings)
                 implementation(Deps.Kmp.Util.onesignal)
                 implementation(Deps.ArkIvanov.Decompose.decompose)
                 implementation(Deps.ArkIvanov.Decompose.extensionsComposeJetbrains)
-//                implementation(Deps.ArkIvanov.Decompose.extensionsComposeJetpack)
                 implementation(Deps.ArkIvanov.Essenty.lifecycle)
+                implementation ("com.google.accompanist:accompanist-systemuicontroller:0.26.3-beta")
             }
         }
         val commonTest by getting {
@@ -53,8 +52,6 @@ kotlin {
                 implementation(compose.material)
                 implementation(Deps.ArkIvanov.Decompose.decompose)
                 implementation(Deps.ArkIvanov.Decompose.extensionsAndroid)
-//                implementation(JetpackCompose.navigation)
-//                implementation (ComposeUtils.accompanistWebview)
                 implementation(Deps.Kmp.Util.landscapist)
             }
         }

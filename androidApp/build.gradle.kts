@@ -1,5 +1,3 @@
-
-
 import org.jetbrains.compose.compose
 
 plugins {
@@ -21,7 +19,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Deps.Versions.compose_compiler
+        kotlinCompilerExtensionVersion = Deps.Versions.composeCompiler
 
     }
     packagingOptions {
@@ -53,18 +51,13 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-//    implementation("androidx.compose.ui:ui:1.2.1")
-//    implementation("androidx.compose.ui:ui-tooling:1.2.1")
-//    implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
-//    implementation("androidx.compose.foundation:foundation:1.2.1")
     implementation(Deps.AndroidX.appCompat)
-    implementation(Deps.JetBrains.Compose.materialDesign)
     implementation(Deps.AndroidX.activityCompose)
     implementation(compose.ui)
+    implementation(compose.material)
     implementation(compose.foundation)
     implementation(Deps.JetBrains.Serialization.serializationJson)
     implementation(Deps.Kmp.Util.onesignal)
-
     implementation(Deps.ArkIvanov.Decompose.decompose)
     implementation(Deps.ArkIvanov.Decompose.extensionsAndroid)
 }

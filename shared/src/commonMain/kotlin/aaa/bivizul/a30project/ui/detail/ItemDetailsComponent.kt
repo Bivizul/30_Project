@@ -18,12 +18,4 @@ class ItemDetailsComponent(
     private val _models = MutableValue(ItemDetails.Model(itemId))
     override val models: Value<ItemDetails.Model> = _models
 
-
-    init {
-        println("ItemDetailsComponent id : $itemId")
-    }
-
-//    override val models: Value<ItemDetails.Model>
-//        get() = TODO("Not yet implemented")
-
 }

@@ -1,46 +1,35 @@
 package aaa.bivizul.a30project.ui.root
 
+import aaa.bivizul.a30project.data.apoststore.ApostStore
 import aaa.bivizul.a30project.data.apoststore.ApostpopcryptStore
+import aaa.bivizul.a30project.ui.apost.ItemApost
+import aaa.bivizul.a30project.ui.apost.ItemApostComponent
 import aaa.bivizul.a30project.ui.detail.ItemDetails
 import aaa.bivizul.a30project.ui.detail.ItemDetailsComponent
 import aaa.bivizul.a30project.ui.list.ItemList
 import aaa.bivizul.a30project.ui.list.ItemListComponent
 import aaa.bivizul.a30project.ui.main.ItemMain
 import aaa.bivizul.a30project.ui.main.ItemMainComponent
-import aaa.bivizul.a30project.ui.apost.ItemApost
-import aaa.bivizul.a30project.ui.apost.ItemApostComponent
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 
-interface Root {
-
-    val childStack: Value<ChildStack<*, Child>>
-
-    sealed class Child {
-        class SplashChild(val component: ItemApost) : Child()
-        class MainChild(val component: ItemMain) : Child()
-        class ListChild(val component: ItemList) : Child()
-        class DetailsChild(val component: ItemDetails) : Child()
-    }
-}
-
-
 class RootComponent constructor(
     componentContext: ComponentContext,
+    private val context: Any
 ) : Root, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
-    val data = ApostpopcryptStore()
-    private val listInput = data.apostpopcrypt
+    val apostpopcryptStore = ApostpopcryptStore()
+    val apostStore = ApostStore()
 
     private val stack =
         childStack(
             source = navigation,
-            initialConfiguration = Config.Splash,
-            handleBackButton = true, // Pop the back stack on back button press
+            initialConfiguration = Config.Apost,
+            handleBackButton = true,
             childFactory = ::createChild,
         )
 
@@ -48,17 +37,19 @@ class RootComponent constructor(
 
     private fun createChild(config: Config, componentContext: ComponentContext): Root.Child =
         when (config) {
-            is Config.Splash -> Root.Child.SplashChild(itemSplash(componentContext))
+            is Config.Apost -> Root.Child.ApostChild(itemApost(componentContext))
             is Config.Main -> Root.Child.MainChild(itemMain(componentContext))
             is Config.List -> Root.Child.ListChild(itemList(componentContext))
             is Config.Details -> Root.Child.DetailsChild(itemDetails(componentContext, config))
         }
 
-    private fun itemSplash(componentContext: ComponentContext): ItemApost =
+    private fun itemApost(componentContext: ComponentContext): ItemApost =
         ItemApostComponent(
             componentContext = componentContext,
-            onClick = {
-                navigation.push(Config.Main)
+            context = context,
+            apostStore = apostStore,
+            onReplaceCur = {
+                navigation.replaceCurrent(Config.Main)
             },
         )
 
@@ -73,7 +64,7 @@ class RootComponent constructor(
     private fun itemList(componentContext: ComponentContext): ItemList =
         ItemListComponent(
             componentContext = componentContext,
-            data = data,
+            apostpopcryptStore = apostpopcryptStore,
             onItemSelected = {
                 navigation.push(Config.Details(itemId = it))
             }
@@ -85,13 +76,13 @@ class RootComponent constructor(
     ): ItemDetails =
         ItemDetailsComponent(
             componentContext = componentContext,
-            data = data,
+            data = apostpopcryptStore,
             itemId = config.itemId
         )
 
     private sealed class Config : Parcelable {
         @Parcelize
-        object Splash : Config()
+        object Apost : Config()
 
         @Parcelize
         object Main : Config()

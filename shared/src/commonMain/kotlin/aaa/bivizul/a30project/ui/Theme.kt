@@ -18,28 +18,29 @@ fun MyApplicationTheme(
 ) {
     val colors = if (darkTheme) {
         darkColors(
-            primary = Color(0xFFBB86FC),
-            primaryVariant = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
+            primary = Color(0xFF1b9328),
+            background = Color(0x65000000),
+            surface = Color(0x75000000)
+
         )
     } else {
         lightColors(
-            primary = Color(0xFF6200EE),
-            primaryVariant = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
+            primary = Color(0xFF38b749),
+            background = Color(0x95FFFFFF),
+            surface = Color(0x751b9328)
         )
     }
     val typography = Typography(
         body1 = TextStyle(
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Normal,
-            fontSize = 16.sp
+            fontSize = 18.sp
         )
     )
     val shapes = Shapes(
         small = RoundedCornerShape(4.dp),
-        medium = RoundedCornerShape(4.dp),
-        large = RoundedCornerShape(0.dp)
+        medium = RoundedCornerShape(8.dp),
+        large = RoundedCornerShape(12.dp)
     )
 
     MaterialTheme(
